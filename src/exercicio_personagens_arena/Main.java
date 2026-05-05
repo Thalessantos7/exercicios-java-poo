@@ -25,7 +25,8 @@ public class Main {
                         4 - Listar personagens
                         5 - Atacar com todos os personagens
                         6 - Usar habilidades especiais
-                        7 - Sair
+                        7 - Escolha um personagem pelo nome
+                        8 - Sair
                         """);
 
                 System.out.print("Escolha: ");
@@ -156,6 +157,70 @@ public class Main {
 
                     case 7:
 
+                        System.out.print("Digite o nome do personagem: ");
+                        String nomeDoPersonagem = sc.nextLine();
+
+                        Personagem encontrado = null;
+
+                        for (Personagem p : personagens) {
+
+                            if (p.getNome().equalsIgnoreCase(nomeDoPersonagem)) {
+
+                                encontrado = p;
+                                break;
+
+                            }
+
+                        }
+
+                        if (encontrado == null) {
+
+                            System.out.println("Personagem não encontrado.");
+
+                        } else {
+
+                            System.out.println("""
+                                    Escolha a ação:
+                                    1 - Atacar
+                                    2 - Usar habilidade especial
+                                    """);
+
+                            System.out.print("Sua ação: ");
+                            int acao = sc.nextInt();
+                            sc.nextLine();
+
+                            try {
+                                if (acao == 1) {
+
+                                    encontrado.atacar();
+
+                                } else if (acao == 2) {
+
+                                    if (encontrado instanceof HabilidadeEspecial) {
+
+                                        HabilidadeEspecial h = (HabilidadeEspecial) encontrado;
+                                        h.usarHabilidadeEspecial();
+
+                                    } else {
+
+                                        System.out.println("Opção inválida.");
+
+                                    }
+
+                                }
+
+                            } catch (RecursoInsuficienteException e) {
+
+                                System.out.println(e.getMessage());
+
+                            }
+
+                        }
+
+                        break;
+
+                    case 8:
+
                         System.out.println("Programa encerrado!");
 
                         break;
@@ -178,7 +243,7 @@ public class Main {
 
             }
 
-        } while (opcao != 7);
+        } while (opcao != 8);
 
         sc.close();
 
