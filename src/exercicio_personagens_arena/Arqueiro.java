@@ -10,7 +10,7 @@ public class Arqueiro extends Personagem implements HabilidadeEspecial {
 
         if (flechas < 0) {
 
-            throw new IllegalArgumentException("Flechas não podem ser menor que 0.");
+            throw new IllegalArgumentException("Flechas não podem ser menores que 0.");
 
         }
 
